@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZypherChats</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ============ SETUP SCREEN ============ -->
+    <div id="setup-screen" class="screen active">
+        <div class="setup-container">
+            <div class="logo">ZypherChats</div>
+            <div id="setup-step-1" class="setup-step active">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="setup-email" placeholder="Enter your Gmail address..." required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="setup-password" placeholder="Enter your Password..." required>
+                </div>
+                <div class="developer-credit">Developer Matheesha Sasmin</div>
+                <button id="setup-next-1" class="btn-primary">Next <i class="fas fa-arrow-right"></i></button>
+                <div id="setup-error" class="error-msg"></div>
+            </div>
+            <div id="setup-step-2" class="setup-step">
+                <div class="input-group">
+                    <i class="fas fa-user-tag"></i>
+                    <input type="text" id="setup-username" placeholder="Choose a unique Username" required>
+                    <span id="username-check" class="check-icon"><i class="fas fa-spinner fa-spin"></i></span>
+                </div>
+                <div id="username-status" class="status-msg"></div>
+                <div class="gender-select">
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                </div>
+                <div class="input-group photo-upload">
+                    <i class="fas fa-image"></i>
+                    <input type="file" id="setup-photo" accept="image/*">
+                    <span id="photo-name">Profile Photo (Optional)</span>
+                    <button id="skip-photo" class="btn-skip">Skip</button>
+                </div>
+                <button id="setup-finish" class="btn-primary">Finish Setup 🚀</button>
+                <div id="setup-finish-error" class="error-msg"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MAIN APP ============ -->
+    <div id="app-screen" class="screen">
+        <!-- Top Header -->
+        <div id="app-header">
+            <div id="header-title">ZypherChats</div>
+            <div id="header-actions">
+                <i class="fas fa-search" id="global-search-btn"></i>
+                <i class="fas fa-ellipsis-v" id="header-menu-btn"></i>
+            </div>
+        </div>
+
+        <!-- Global Search Overlay -->
+        <div id="search-overlay" class="overlay">
+            <div class="overlay-content">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="global-search-input" placeholder="Search by Username...">
+                    <i class="fas fa-times" id="close-search"></i>
+                </div>
+                <div id="search-results"></div>
+            </div>
+        </div>
+
+        <!-- Pages Container -->
+        <div id="pages-container">
+            <!-- CHATS PAGE -->
+            <div id="page-chats" class="page active">
+                <div id="chats-list"></div>
+                <button id="new-chat-btn" class="fab"><i class="fas fa-plus"></i></button>
+            </div>
+
+            <!-- GROUPS PAGE -->
+            <div id="page-groups" class="page">
+                <div id="groups-list"></div>
+                <button id="new-group-btn" class="fab"><i class="fas fa-users"></i></button>
+            </div>
+
+            <!-- HOME PAGE -->
+            <div id="page-home" class="page">
+                <div class="home-container">
+                    <img src="https://i.ibb.co/5Y2YkXk/chat-logo.png" alt="ZypherChats Banner" id="home-banner" onerror="this.src='https://via.placeholder.com/300x200/1e1e1e/00ffcc?text=ZypherChats'">
+                    <h2>Developer Matheesha Sasmin</h2>
+                    <div class="code-runner">
+                        <pre id="typing-code"><span class="code-comment">// Welcome to ZypherChats</span>
+<span class="code-keyword">const</span> <span class="code-var">future</span> = <span class="code-string">"Building Dreams"</span>;
+<span class="code-keyword">function</span> <span class="code-func">connect</span>() { <span class="code-var">console</span>.<span class="code-func">log</span>(<span class="code-string">"🚀"</span>); }</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOXA AI PAGE -->
+            <div id="page-noxa" class="page">
+                <div class="chat-window" id="noxa-chat-window">
+                    <div class="chat-header">
+                        <img src="https://i.ibb.co/7n4Y0HX/noxa-ai.png" alt="NOXA AI" onerror="this.src='https://via.placeholder.com/40/00ffcc/000?text=AI'">
+                        <span>NOXA AI (Assistant)</span>
+                        <span class="online-dot"></span>
+                    </div>
+                    <div class="messages-container" id="noxa-messages">
+                        <div class="message received"><div class="bubble">Hello! I'm NOXA AI. Ask me anything! 😊</div></div>
+                    </div>
+                    <div class="message-input-bar">
+                        <i class="fas fa-smile"></i>
+                        <input type="text" id="noxa-input" placeholder="Ask NOXA...">
+                        <i class="fas fa-paper-plane" id="noxa-send"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE PAGE -->
+            <div id="page-profile" class="page">
+                <div class="profile-container">
+                    <div class="profile-photo-wrapper">
+                        <img id="profile-avatar" src="https://via.placeholder.com/100/2a2a2a/fff?text=User" alt="Avatar">
+                        <label for="profile-photo-input" class="camera-icon"><i class="fas fa-camera"></i></label>
+                        <input type="file" id="profile-photo-input" accept="image/*" style="display:none">
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="profile-username">@username</h3>
+                        <p id="profile-email">email@example.com</p>
+                        <p id="profile-gender">Gender: Male</p>
+                    </div>
+                    <div class="settings-list">
+                        <div class="setting-item" id="edit-username-btn"><i class="fas fa-user-edit"></i> Edit Username</div>
+                        <div class="setting-item" id="hide-username-btn"><i class="fas fa-user-secret"></i> Hide Username (Search)</div>
+                        <div class="setting-item" id="mute-all-btn"><i class="fas fa-bell-slash"></i> Mute All Chats</div>
+                        <div class="setting-item" id="lock-app-btn"><i class="fas fa-lock"></i> App Lock (UI)</div>
+                        <div class="setting-item logout-btn" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div id="bottom-nav">
+            <div class="nav-item active" data-page="page-chats"><i class="fas fa-comment-dots"></i><span>Chats</span></div>
+            <div class="nav-item" data-page="page-groups"><i class="fas fa-users"></i><span>Groups</span></div>
+            <div class="nav-item" data-page="page-home"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" data-page="page-noxa"><i class="fas fa-robot"></i><span>NOXA AI</span></div>
+            <div class="nav-item" data-page="page-profile"><i class="fas fa-user"></i><span>Profile</span></div>
+        </div>
+    </div>
+
+    <!-- ============ CHAT WINDOW OVERLAY ============ -->
+    <div id="chat-overlay" class="overlay">
+        <div class="chat-window full">
+            <div class="chat-header">
+                <i class="fas fa-arrow-left" id="close-chat"></i>
+                <span id="chat-partner-name">User</span>
+                <div class="chat-actions">
+                    <i class="fas fa-phone-alt"></i>
+                    <i class="fas fa-video"></i>
+                    <i class="fas fa-ellipsis-v" id="chat-menu-btn"></i>
+                </div>
+            </div>
+            <div class="messages-container" id="chat-messages"></div>
+            <div class="message-input-bar">
+                <i class="fas fa-plus" id="attach-btn"></i>
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <i class="fas fa-paper-plane" id="chat-send"></i>
+            </div>
+            <!-- Attachment options -->
+            <div id="attach-options" style="display:none; padding:10px; background:#1e1e1e; display:flex; gap:15px; flex-wrap:wrap;">
+                <label><i class="fas fa-image"></i> Photo <input type="file" accept="image/*" id="attach-photo" style="display:none"></label>
+                <label><i class="fas fa-video"></i> Video <input type="file" accept="video/*" id="attach-video" style="display:none"></label>
+                <label><i class="fas fa-poll"></i> Poll <input type="text" id="poll-question" placeholder="Ask?" style="width:100px;"></label>
+                <button id="send-poll-btn">Send Poll</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ GROUP INFO OVERLAY ============ -->
+    <div id="group-info-overlay" class="overlay">
+        <div class="overlay-content">
+            <i class="fas fa-times" id="close-group-info"></i>
+            <h3 id="group-info-name">Group Name</h3>
+            <p id="group-info-desc">Description</p>
+            <div id="group-members-list"></div>
+            <button id="group-add-member-btn">Add Member</button>
+            <input type="text" id="group-add-username" placeholder="Username to add">
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
